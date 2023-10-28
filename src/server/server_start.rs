@@ -1,17 +1,16 @@
-use actix_web::{App, get, HttpResponse, HttpServer, Responder};
 use crate::EnvironmentVariables;
-
-#[get("/")]
-async fn index() -> impl Responder {
-    return HttpResponse::Ok().body("Success");
-}
+use actix_web::{App, HttpServer, web};
 
 #[actix_web::main]
 pub async fn handle_server_start(environment_variables: EnvironmentVariables) -> std::io::Result<()> {
-    let server: String = format!("{}:{}", environment_variables.server_url, environment_variables.server_port);
+    use crate::routes::login_routes;
+
+    let server: String = format!("{}:{}", environment_variables.get_server_url(), environment_variables.get_server_port());
 
     return HttpServer::new(|| {
         App::new()
-            .service(index)
+        .service(web::scope("/api").service(login_routes::login)
+            .service(login_routes::index)
+        )
     }).bind(server)?.run().await;
 }
