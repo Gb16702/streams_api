@@ -15,7 +15,7 @@ fn load_env_variables() -> Result<EnvironmentVariables, VarError> {
     dotenv().ok().ok_or_else(|| VarError::NotPresent)?;
 
     let mut env_variables = EnvironmentVariables::new();
-    env_variables.set_server_url(env::var("SERVER_URL")?);
+    env_variables.set_server_address(env::var("SERVER_ADDRESS")?);
     env_variables.set_server_port(env::var("SERVER_PORT")?);
 
     Ok(env_variables)

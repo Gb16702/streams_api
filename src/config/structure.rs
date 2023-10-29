@@ -1,22 +1,22 @@
 pub struct EnvironmentVariables {
-    server_url: String,
+    server_address: String,
     server_port: String,
 }
 
 impl EnvironmentVariables {
     pub fn new() -> Self {
         return Self {
-            server_url: String::new(),
+            server_address: String::new(),
             server_port: String::new(),
         };
     }
 
-    pub fn get_server_url(&self) -> &String {
-        return &self.server_url;
+    pub fn get_server_address(&self) -> &String {
+        return &self.server_address;
     }
 
-    pub fn set_server_url(&mut self, server_url: String) {
-        self.server_url = server_url;
+    pub fn set_server_address(&mut self, server_address: String) {
+        self.server_address = server_address;
     }
 
     pub fn get_server_port(&self) -> &String {

@@ -1,0 +1,11 @@
+version:  "3.9"
+
+services:
+  server:
+    build: .
+    command: sh -c "cargo run"
+    volumes:
+      - .:/app
+    ports:
+        - "20000:20000"
+    mem_reservation: 128M

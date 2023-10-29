@@ -5,7 +5,7 @@ use actix_web::{App, HttpServer, web};
 pub async fn handle_server_start(environment_variables: EnvironmentVariables) -> std::io::Result<()> {
     use crate::routes::login_routes;
 
-    let server: String = format!("{}:{}", environment_variables.get_server_url(), environment_variables.get_server_port());
+    let server: String = format!("{}:{}", environment_variables.get_server_address(), environment_variables.get_server_port());
 
     return HttpServer::new(|| {
         App::new()
