@@ -1,4 +1,6 @@
 mod config;
+mod database;
+
 mod routes {
     pub mod login_routes;
 }

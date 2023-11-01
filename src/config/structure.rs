@@ -3,6 +3,11 @@ pub struct EnvironmentVariables {
     server_port: String,
     database_url: String
 }
+
+pub struct AppState {
+    pub db: sqlx::Pool<sqlx::Postgres>
+}
+
 impl EnvironmentVariables {
     pub fn new() -> Self {
             return Self {
