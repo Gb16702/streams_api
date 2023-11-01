@@ -1,7 +1,6 @@
 use sqlx::{postgres::PgPoolOptions, Pool, Postgres};
 use std::error::Error;
 
-
 pub async fn connect_to_database(database_url: &str) -> Result<Pool<Postgres>, Box<dyn Error>> {
     use crate::database::migrate::migrate_database;
 

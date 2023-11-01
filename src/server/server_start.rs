@@ -1,6 +1,5 @@
 use actix_web::{App, HttpServer, web};
 
-
 #[actix_web::main]
 pub async fn handle_server_start(environment_variables: crate::EnvironmentVariables) -> Result<(), Box<dyn std::error::Error>> {
     use crate::routes::login_routes;
