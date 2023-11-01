@@ -1,11 +1,24 @@
 version:  "3.9"
-
 services:
   server:
     build: .
-    command: sh -c "cargo run"
     volumes:
       - .:/app
     ports:
         - "20000:20000"
     mem_reservation: 128M
+    depends_on:
+        - database
+  database:
+    image: postgres:alpine
+    environment:
+        - POSTGRES_USER=${DB_USER}
+        - POSTGRES_PASSWORD=${DB_PASSWORD}
+        - POSTGRES_DB=${DB_NAME}
+    ports:
+        - "5400:5432"
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+
+volumes:
+    postgres-db:
