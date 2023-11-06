@@ -1,11 +1,14 @@
+#[derive(Debug)]
+pub struct Cred {
+    pub user_email: String,
+    pub user_password: String
+}
+
 pub struct EnvironmentVariables {
     server_address: String,
     server_port: String,
-    database_url: String
-}
-
-pub struct AppState {
-    pub db: sqlx::Pool<sqlx::Postgres>
+    database_url: String,
+    pub cred: Vec<Cred>
 }
 
 impl EnvironmentVariables {
@@ -13,7 +16,8 @@ impl EnvironmentVariables {
             return Self {
                 server_address: String::new(),
                 server_port: String::new(),
-                database_url: String::new()
+                database_url: String::new(),
+                cred: Vec::new()
             };
     }
 
@@ -40,4 +44,8 @@ impl EnvironmentVariables {
     pub fn set_database_url(&mut self, database_url: String) -> () {
         self.database_url = database_url;
     }
+}
+
+pub struct AppState {
+    pub db: sqlx::Pool<sqlx::Postgres>
 }
