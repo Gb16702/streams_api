@@ -13,7 +13,8 @@ where
     let pool_result = connect_to_database(environment_variables.get_database_url()).await;
 
     for x in define_user().unwrap() {
-        create_user(x.user_email, x.user_password);
+        create_user(x.user_email, x.user_password,
+            &pool_result.as_ref().unwrap()).await;
     }
 
      return match pool_result {
