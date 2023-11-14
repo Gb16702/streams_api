@@ -1,4 +1,5 @@
 use actix_web::{App, HttpServer, web};
+use actix_cors::Cors;
 
 #[actix_web::main]
 pub async fn handle_server_start<F>(environment_variables: crate::structure::EnvironmentVariables, define_user: F) -> Result<(), Box<dyn std::error::Error>>
@@ -20,10 +21,16 @@ where
      return match pool_result {
         Ok(pool) => {
             HttpServer::new(move || {
+                let cors_middleware= Cors::default()
+                    .allow_any_origin()
+                    .allow_any_method()
+                    .allow_any_header()
+                    .max_age(3600);
                 App::new()
                     .app_data(web::Data::new(crate::config::structure::AppState {
                         db: pool.clone()
                     }))
+                    .wrap(cors_middleware)
                     .service(web::scope("/api")
                         .service(login_routes::login)
                         .service(login_routes::index)

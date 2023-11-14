@@ -1,6 +1,10 @@
-#[derive(Debug)]
+use serde::{Deserialize, Serialize};
+
+#[derive(Debug, Serialize, Deserialize)]
 pub struct Cred {
+    #[serde(rename="email")]
     pub user_email: String,
+    #[serde(rename = "password")]
     pub user_password: String
 }
 
